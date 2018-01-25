@@ -61,10 +61,10 @@ class MQTTClient():
             self.config.get('port'),
             self.config.get('keepalive')
         )
-        self.__mqttc.loop_start()
         return self
 
     def publish(self, topic, payload):
+        self.__mqttc.loop_start()
         self.__mqttc.publish(topic, payload)
         self.__mqttc.loop_stop()
         return True
