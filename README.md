@@ -17,7 +17,7 @@ pip install paho-mqtt
 ## Configuration
 Based on the requirement you can define a background task in the ```__init__.py``` file. To get started check out the following example:
 ```
-mqttc = MQTTClient()                                                      # initialize the MQTT client
+mqttc = MQTTClient().connect()                                            # initialize the MQTT client
 
 @cbpi.backgroundtask(key='mqtt_client', interval=2.5)                     # create bg job with an interval of 2.5 seconds 
 def mqtt_client_background_task(api):
@@ -31,7 +31,7 @@ def mqtt_client_background_task(api):
             'unit': value.instance.get_unit()
         }
         payload = json.dumps(data, ensure_ascii=False)                    # convert payload to JSON
-        mqttc.connect().publish(topic, payload)                           # connect to the MQTT server and publish the payload
+        mqttc.publish(topic, payload)                                     # publish the payload
 
 ```
 
