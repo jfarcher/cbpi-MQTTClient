@@ -1,4 +1,5 @@
 import paho.mqtt.client as mqtt
+import uuid
 from modules import cbpi
 
 """
@@ -8,10 +9,11 @@ In order to instantiate the class simply pass a configuration dictionary to the
 constructor. The config dictionary can contain the following options:
 
     {
+        'id': 'yourClientID',		# Client ID	-> defaults to generated UUID
         'host': 'your-mqtt-host.com'    # URI           -> defaults to 127.0.0.1
         'port': 8883                    # Port          -> defaults to 1883
-        'keepalive: 60                  # Lifetime      -> defaults to 60s
-        'credentials: {                 # HTTP-Config   -> defaults to None
+        'keepalive': 60                 # Lifetime      -> defaults to 60s
+        'credentials': {                # HTTP-Config   -> defaults to None
             'user': 'foo'               #   User
             'password': 'bar'           #   Password
         }
@@ -35,26 +37,24 @@ class MQTTClient():
         if config is not None:
             self.config = config
 
-        self.__mqttc = mqtt.Client()
+        if self.config.get('id') is None:
+           self.config['id'] = uuid.uuid4().hex 
+           
+        self.__mqttc = mqtt.Client(client_id=self.config.get('id'))
         self.__mqttc.on_connect = self.__on_connect
 
     def __on_connect(self, client, userdata, flags, rc):
         cbpi.app.logger.info('MQTTClient connected. RC = ' + str(rc))
 
     def connect(self):
-        credentials = self.config.get('credentials')
-        tls = self.config.get('tls_settings')
+	credentials = self.config.get('credentials')
+	tls = self.config.get('tls_settings')
 
         if credentials is not None:
-            user = credentials.get('user')
-            password = credentials.get('password')
-            self.__mqttc.username_pw_set(user, password)
+            self.__mqttc.username_pw_set(**credentials)
 
         if tls is not None:
-            self.__mqttc.tls_set(
-                tls.get('ca_certs'),
-                tls_version=tls.get('tls_version')
-            )
+            self.__mqttc.tls_set(**tls)
 
         self.__mqttc.connect(
             self.config.get('host'),
