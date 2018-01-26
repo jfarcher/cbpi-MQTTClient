@@ -41,3 +41,7 @@ In order to test the client in a local enviroment you'll need an MQTT message br
 sudo apt-get install mosquitto mosquitto-clients
 ```
 If you want to subscribe to the published content I recomend the [MQTT.fx](http://www.mqttfx.org/) client.
+
+## Example - SAP IoT Services
+Integrating CraftBeerPi through [cbpi-MQTTClient](https://github.com/peakMeissner/cbpi-MQTTClient) with [SAP IoT Services](https://www.sap.com/germany/trends/internet-of-things.html).
+![](https://github.com/peakMeissner/cbpi-MQTTClient/blob/master/docs/img/SAP_IoT_Service_MQTT.png)
