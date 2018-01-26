@@ -4,7 +4,7 @@ from MQTTClient import MQTTClient
 
 mqttc = MQTTClient().connect()                                            # initialize the MQTT client
 '''
-                                                                          # uncomment this section if needed an modify :)
+                                                                          # uncomment and modify :)
 @cbpi.backgroundtask(key='mqtt_client', interval=2.5)                     # create bg job with an interval of 2.5 seconds 
 def mqtt_client_background_task(api):
     sensors = cbpi.cache.get('sensors')                                   # read available sensors
