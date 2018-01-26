@@ -19,7 +19,7 @@ constructor. The config dictionary can contain the following options:
         }
         'tls_settings': {               # TLS-Config    -> defaults to None
             'ca_certs': '/etc/ssl/...'  #   Cert-Dir
-            'tls_version': XXX          #   TLS-Version  -> defaults TLSv1
+            'tls_version': XXX          #   TLS-Version -> defaults TLSv1
         }
     }
 
