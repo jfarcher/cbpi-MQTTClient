@@ -36,7 +36,7 @@ def mqtt_client_background_task(api):
 ```
 
 ## Testing
-In order to test the client in a local enviroment you'll need an MQTT message broker such as [Mosquitto](https://mosquitto.org/). You can easily install the message broker on you local CraftBeerPi by using the following command. 
+In order to test the client in a local environment you'll need an MQTT message broker such as [Mosquitto](https://mosquitto.org/). You can easily install the message broker on your local CraftBeerPi by using the following command. 
 ```
 sudo apt-get install mosquitto mosquitto-clients
 ```
