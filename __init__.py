@@ -13,7 +13,8 @@ def mqtt_client_background_task(api):
         topic = 'CraftBeerPi/sensor/' + str(value.instance.id)            # define the MQTT topic
         data = {                                                          # define the playload
             'id': value.instance.id,
-            'value': value.instance.last_value,
+            'name':value.instance.name,
+            'actual': value.instance.last_value,
             'unit': value.instance.get_unit()
         }
         payload = json.dumps(data, ensure_ascii=False)                    # convert payload to JSON
